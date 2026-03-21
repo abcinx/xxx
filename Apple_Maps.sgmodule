@@ -1,5 +1,5 @@
-#!name= Redirect Apple Maps to 🇺🇸US
-#!desc=Apple Maps
+#!name= Redirect Apple Maps
+#!desc=🇺🇸US
 
 [URL Rewrite]
 # Redirect Apple Maps to US
