@@ -1,5 +1,5 @@
-#!name= Redirect Apple Maps
-#!desc=🇺🇸US
+#!name= Redirect Apple Maps to 🇺🇸US
+#!desc=只作用于Apple Maps，不修改定位服务和地区检测，可以通过搭配使用其他模块达成混合效果。
 
 [URL Rewrite]
 # Redirect Apple Maps to US
