@@ -26,7 +26,6 @@ disconnect-on-policy-change = false
 [Proxy]
 
 [Remote Proxy]
-Mitce = https://sub.store/download/xxx,udp=true,block-quic=true,fast-open=default,vmess-aead=true,skip-cert-verify=true,enabled=true,flexible-sni=false
 
 [Proxy Chain]
 
