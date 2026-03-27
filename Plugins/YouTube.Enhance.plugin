@@ -1,6 +1,6 @@
 #!name=Youtube (Music) Enhance
 #!desc=适用于 Youtube & Youtube Music
-#!icon = https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/IconSet/YouTube.png
+#!icon = https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.png
 [Rule]
 AND,((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)),REJECT
 AND,((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)),REJECT
