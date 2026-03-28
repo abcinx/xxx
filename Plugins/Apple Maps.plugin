@@ -1,8 +1,8 @@
 #!name= Redirect Apple Maps
 #!desc=更换地图数据来源
 #!icon = https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Apple%20Maps.png
+
 [URL Rewrite]
-# Redirect Apple Maps
 (^https?:\/\/gspe\d*-ssl\.ls\.apple\.)(com|cn)(\/.*)(country_code=[A-Z]{2})(.*) $1$2$3country_code=US$5 header
 (^https?:\/\/gspe\d*-ssl\.ls\.apple\.)(com|cn)(\/.*)(environment=[a-z/-]{4,})(.*) $1$2$3environment=prod$5 header
 
