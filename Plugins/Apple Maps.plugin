@@ -1,5 +1,5 @@
 #!name= Redirect Apple Maps
-#!desc=United States
+#!desc=更换地图数据来源
 #!icon = https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Apple%20Maps.png
 [URL Rewrite]
 # Redirect Apple Maps to US
