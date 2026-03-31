@@ -18,7 +18,6 @@ DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 # NAME: Copilot
 DOMAIN,copilot.microsoft.com
-DOMAIN,copilot.bing.com
 # NAME: OpenAI
 DOMAIN,browser-intake-datadoghq.com
 DOMAIN,chat.openai.com.cdn.cloudflare.net
