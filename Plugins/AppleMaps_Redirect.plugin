@@ -1,0 +1,15 @@
+#!name=Apple Maps Redirect
+#!desc=将 Apple 地图请求区域重定向至美国 (US)，旨在解锁海外版地图数据及功能（如 Look Around）。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/AppleMaps.PNG
+#!author=Custom
+#!homepage=https://github.com/LoonProject/Loon-Extensions
+#!date=2026-03-31
+
+https://monica.im/en/tools/rewrite-text
+# 强制修改国家代码为 US
+^https?:\/\/gspe\d*-ssl\.ls\.apple\.(com|cn)\/.*country_code=[A-Z]{2} header-replace country_code=US
+# 强制修改环境参数为 prod
+^https?:\/\/gspe\d*-ssl\.ls\.apple\.(com|cn)\/.*environment=[a-z/-]{4,} header-replace environment=prod
+
+[MITM]
+hostname = gspe35-ssl.ls.apple.com, gspe*-ssl.ls.apple.com
