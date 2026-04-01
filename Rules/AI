@@ -1,12 +1,27 @@
 # NAME: Gemini
-DOMAIN-KEYWORD,gemini
 DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN,alkalimining-pa.googleapis.com
+DOMAIN,ia-pa.clients.google.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,apis.google.com
+DOMAIN-SUFFIX,assistant.google.com
+DOMAIN-SUFFIX,neural.google
+DOMAIN,ai.google.dev
+DOMAIN,makersuite.google.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,generativelanguage.googleapis.com
-DOMAIN-SUFFIX,alkalimessages-pa.googleapis.com
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,gstatic.com
 DOMAIN-SUFFIX,googleusercontent.com
-DOMAIN-SUFFIX,veo.google
-DOMAIN-SUFFIX,lyria.google
-DOMAIN,aistudio.google.com
+DOMAIN-SUFFIX,googlevideo.com
+DOMAIN-SUFFIX,support.google.com
+DOMAIN-KEYWORD,colab
+DOMAIN-KEYWORD,developerprofiles
+DOMAIN-KEYWORD,generativelanguage
 # NAME: Claued
 DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
