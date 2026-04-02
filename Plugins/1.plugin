@@ -1,5 +1,6 @@
 #!name=Youtube(Music)Enhance
 #!desc=适用于 Youtube & Youtube Music
+#!openUrl=https://apps.apple.com/app/id544007664
 [Argument]
 blockUpload=switch, false, true, tag=隐藏上传按钮, desc=用于隐藏YouTube底栏的上传按钮
 blockShorts=switch, false, true, tag=隐藏Shorts按钮, desc=用于隐藏YouTube底栏的Shorts按钮
