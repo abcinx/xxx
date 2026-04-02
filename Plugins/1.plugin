@@ -6,6 +6,6 @@ AND,((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)),REJECT
 [URL Rewrite]
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad reject-200
 [Script]
-http-response ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) requires-body=1,binary-body-mode=1,script-path=youtube.response.js
+http-response ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) requires-body=1,binary-body-mode=1
 [MITM]
 hostname = *.googlevideo.com, youtubei.googleapis.com
