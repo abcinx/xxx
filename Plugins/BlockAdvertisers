@@ -417,11 +417,4 @@ DOMAIN-SUFFIX, rixengine.com, REJECT
 
 DOMAIN-SUFFIX, amazon-adsystem.com, REJECT
 
-[Rewrite]
-^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_ reject
-^https:\/\/images\.pinduoduo\.com\/mrk\/ reject
-^https:\/\/images\.pinduoduo\.com\/marketing_api\/ reject
 
-[MitM]
-hostname=video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
