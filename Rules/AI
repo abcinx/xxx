@@ -10,9 +10,16 @@ DOMAIN-SUFFIX,gstatic.com
 DOMAIN-KEYWORD,google-paisa
 DOMAIN-KEYWORD,generativelanguage
 # NAME: Claued
-DOMAIN,cdn.usefathom.com
-DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,api.anthropic.com
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,mcp.anthropic.com
+DOMAIN-SUFFIX,servestatic.claude.ai
+DOMAIN-SUFFIX,statsig.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,claude
 # Copilot
 DOMAIN,copilot.microsoft.com,Manual
 # NAME: OpenAI
