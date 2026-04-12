@@ -1,34 +1,38 @@
-# NAME: Gemini
-DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,generativelanguage.googleapis.com
-DOMAIN-SUFFIX,alkalimining-pa.googleapis.com
-DOMAIN-SUFFIX,googleusercontent.com
-DOMAIN-SUFFIX,aistudio.google.com
-DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,deepmind.com
-DOMAIN-SUFFIX,gstatic.com
-DOMAIN-KEYWORD,google-paisa
-DOMAIN-KEYWORD,generativelanguage
-# NAME: Claued
-DOMAIN-SUFFIX,claude.ai
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,api.anthropic.com
-DOMAIN-SUFFIX,claudeusercontent.com
-DOMAIN-SUFFIX,mcp.anthropic.com
-DOMAIN-SUFFIX,servestatic.claude.ai
-DOMAIN-SUFFIX,statsig.com
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-KEYWORD,anthropic
-DOMAIN-KEYWORD,claude
-# Copilot
-DOMAIN,copilot.microsoft.com,Manual
-# NAME: OpenAI
-DOMAIN-SUFFIX,chatgpt.com
+# ===== OpenAI / ChatGPT =====
 DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-SUFFIX,auth0.com
-DOMAIN-SUFFIX,client-api.arkoselabs.com
-DOMAIN-SUFFIX,chatgpt.livekit.cloud
-DOMAIN-SUFFIX,host.livekit.cloud
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,api.openai.com
+
+# ===== Google Gemini =====
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,clients6.google.com
+
+# ===== Claude (Anthropic) =====
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,api.anthropic.com
+
+# ===== GitHub Copilot =====
+DOMAIN-SUFFIX,githubcopilot.com
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,api.githubcopilot.com
+
+# ===== 通用 AI CDN / 加速 =====
+DOMAIN-SUFFIX,azureedge.net
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,cloudflare-dns.com
+
+# ===== Fallback（兜底）=====
 DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,gemini
+DOMAIN-KEYWORD,claude
+DOMAIN-KEYWORD,copilot
