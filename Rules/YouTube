@@ -1,14 +1,30 @@
-# YouTube
-DOMAIN-SUFFIX,youtube.com
-DOMAIN-SUFFIX,youtu.be
-DOMAIN-SUFFIX,googlevideo.com
-DOMAIN-SUFFIX,ytimg.com
-DOMAIN-SUFFIX,youtube-nocookie.com
-DOMAIN-SUFFIX,youtube.googleapis.com
-DOMAIN-SUFFIX,youtubei.googleapis.com
-DOMAIN-KEYWORD,youtube
-USER-AGENT,*YouTube*
-USER-AGENT,*YouTubeMusic*
-IP-CIDR,172.110.32.0/21,no-resolve
-IP-CIDR,216.73.80.0/20,no-resolve
-IP-CIDR6,2620:120:e000::/40,no-resolve
+[Rule]
+# > YouTube 核心域名
+DOMAIN-SUFFIX,googlevideo.com,PROXY,no-resolve
+DOMAIN-SUFFIX,youtube.com,PROXY,no-resolve
+DOMAIN-SUFFIX,youtu.be,PROXY,no-resolve
+DOMAIN-SUFFIX,ytimg.com,PROXY,no-resolve
+DOMAIN-SUFFIX,ggpht.com,PROXY,no-resolve
+DOMAIN-SUFFIX,gvt1.com,PROXY,no-resolve
+
+# > YouTube API & 功能性域名
+DOMAIN-SUFFIX,youtubei.googleapis.com,PROXY
+DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com,PROXY
+DOMAIN-SUFFIX,yt.be,PROXY
+DOMAIN-SUFFIX,youtube-nocookie.com,PROXY
+
+# > YouTube Music
+DOMAIN-SUFFIX,music.youtube.com,PROXY
+DOMAIN-KEYWORD,music.youtube,PROXY
+
+# > 关键词匹配 (自动补全你列表里那些几百个国家后缀)
+DOMAIN-KEYWORD,youtube,PROXY
+
+# > 应用进程与 UA (针对 App 端)
+USER-AGENT,YouTube*,PROXY
+USER-AGENT,com.google.ios.youtube*,PROXY
+
+# > IP 段
+IP-CIDR,172.110.32.0/21,PROXY,no-resolve
+IP-CIDR,216.73.80.0/20,PROXY,no-resolve
+IP-CIDR6,2620:120:e000::/40,PROXY,no-resolve
