@@ -1,6 +1,6 @@
 #!name=Adblock
 #!desc=屏蔽网站广告。
-#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/IconSet/Adblock.png
 
 [Rule]
 DOMAIN-KEYWORD, adstrategy, REJECT
