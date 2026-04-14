@@ -3,11 +3,6 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Spotify.PNG
 #!date=2026-04-15
 
-[Rule]
-# 如果需要，可以在此处添加分流规则，例如：
-# DOMAIN-KEYWORD,spotify,PROXY
-# IP-CIDR,35.186.224.25/32,REJECT
-
 [Rewrite]
 # 1. 强制刷新用户配置数据
 ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/user-customization-service\/v1\/customize header-del if-none-match
