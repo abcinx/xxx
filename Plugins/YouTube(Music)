@@ -1,5 +1,6 @@
 #!name=Youtube(Music)
 #!desc=移除广告，功能增强。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 
 [Argument]
 blockUpload=switch, false, true, tag=隐藏上传按钮, desc=用于隐藏YouTube底栏的上传按钮
