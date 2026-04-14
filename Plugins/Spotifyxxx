@@ -20,13 +20,13 @@
 
 [Script]
 # Gabo 服务处理 (广告/追踪)
-http-request ^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com\/gabo-receiver-service script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-gabo.js, timeout=10, tag=spotify-gabo
+http-request ^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com\/gabo-receiver-service script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-gabo.js, timeout=10, tag=spotify-gabo
 
 # 视图层数据处理 (艺术家/专辑)
-http-request ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-Json-copy.js, timeout=10, tag=spotify-json
+http-request ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-json.js, timeout=10, tag=spotify-json
 
 # 核心协议修改 (解锁 UI/切歌限制) - 采用 Eevee 逻辑
-http-response ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-proto-eevee.js, requires-body=true, binary-body-mode=true, timeout=10, tag=spotifyProto
+http-response ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-proto.js, requires-body=true, binary-body-mode=true, timeout=10, tag=spotifyProto
 
 [Mitm]
 # 修正后的主机名匹配，覆盖所有 Spotify 相关业务子域名
