@@ -1,0 +1,33 @@
+#!name=Spotify 增强优化版
+#!desc=去广告、解锁无限切歌及 UI 清爽化。注意：无法解锁极高音质。
+#!icon=https://img.icons8.com/?size=100&id=ZuQiaFCa1vXe&format=png&color=000000
+#!date=2026-04-15
+
+[Rule]
+# 如果需要，可以在此处添加分流规则，例如：
+# DOMAIN-KEYWORD,spotify,PROXY
+# IP-CIDR,35.186.224.25/32,REJECT
+
+[Rewrite]
+# 1. 强制刷新用户配置数据
+^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/user-customization-service\/v1\/customize header-del if-none-match
+
+# 2. 屏蔽广告、上报、AI DJ 及冗余服务 (合并正则提升性能)
+^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(pendragon|capping-api|partner-|pam-view-service|social-connect\/v.\/sessions) reject-dict
+
+# 3. 屏蔽特定 AI DJ 内容
+^https:\/\/spclient\.wg\.spotify\.com\/metadata\/4\/track\/37i9dQZF1EYkqdzj48dyYq reject-dict
+
+[Script]
+# Gabo 服务处理 (广告/追踪)
+http-request ^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com\/gabo-receiver-service script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-gabo.js, timeout=10, tag=spotify-gabo
+
+# 视图层数据处理 (艺术家/专辑)
+http-request ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-Json-copy.js, timeout=10, tag=spotify-json
+
+# 核心协议修改 (解锁 UI/切歌限制) - 采用 Eevee 逻辑
+http-response ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-proto-eevee.js, requires-body=true, binary-body-mode=true, timeout=10, tag=spotifyProto
+
+[Mitm]
+# 修正后的主机名匹配，覆盖所有 Spotify 相关业务子域名
+hostname = spclient.wg.spotify.com, *-spclient.spotify.com
