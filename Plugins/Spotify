@@ -4,27 +4,21 @@
 #!date=2026-04-15
 
 [Rule]
-# 1. 强制禁止 QUIC，确保流量走拦截通道
 AND,((DOMAIN-SUFFIX, spotify.com), (PROTOCOL, QUIC)),REJECT
-# 2. 屏蔽广告追踪与日志上报
-DOMAIN, ads-fa.spotify.com, REJECT
-DOMAIN, analytics.spotify.com, REJECT
-DOMAIN, crashdump.spotify.com, REJECT
-DOMAIN, log.spotify.com, REJECT
 
 [Rewrite]
-# 移除缓存验证，确保脚本始终生效
-^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/user-customization-service\/v1\/customize header-del if-none-match
-# 屏蔽会员中心冗余界面
-^https:\/\/.*-spclient\.spotify\.com\/pam-view-service\/ reject-dict
-# 屏蔽 AI DJ
-^https:\/\/.*-spclient\.spotify\.com\/.*37i9dQZF1EYkqdzj48dyYq reject-dict
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize header-del if-none-match
+
+#屏蔽设置界面会员信息，仅改变显示，可以删去
+^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ reject-dict
+
+#屏蔽AI DJ的url
+37i9dQZF1EYkqdzj48dyYq reject-dict
 
 [Script]
-# 广告过滤脚本
-http-request ^https:\/\/(.*-spclient\.spotify\.com|spclient\.wg\.spotify\.com)\/gabo-receiver-service script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-gabo.js, timeout=10, tag=Spotify_Ads
-# 核心功能解锁脚本 (Protobuf)
-http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-protobuf.js, requires-body=true, binary-body-mode=true, timeout=10, tag=Spotify_Unlock
+http-request ^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-gabo.js, timeout=10, tag=spotify-gabo
+
+http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-protobuf.js, requires-body=true, binary-body-mode=true, timeout=10, tag=Ev_spotifyProto
 
 [Mitm]
-hostname = spclient.wg.spotify.com, *-spclient.spotify.com
+hostname = spclient.wg.spotify.com, *spclient.spotify.com
