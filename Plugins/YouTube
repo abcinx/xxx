@@ -1,0 +1,28 @@
+#!name=YouTube & Music
+#!desc=功能：去广告 (视频/瀑布流/搜索结果)、自动翻译字幕、精简底栏图标。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
+#!date=2026-04-15
+
+[Argument]
+blockUpload = switch, false, true, tag=隐藏上传按钮, desc=隐藏 YouTube 底栏正中间的 "+" 按钮
+blockShorts = switch, false, true, tag=隐藏Shorts按钮, desc=隐藏 YouTube 底栏的 Shorts 选项卡
+blockImmersive = switch, false, true, tag=隐藏选段按钮, desc=隐藏 YouTube Music 底栏的选段(Samples)按钮
+captionLang = select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=字幕翻译语言, desc=视频字幕默认翻译的目标语言
+lyricLang = select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=歌词翻译语言, desc=Music 歌词默认翻译的目标语言
+debug = switch, false, true, tag=调试模式, desc=开启后将在日志中输出详细重写信息
+
+[Rule]
+# 屏蔽 QUIC 协议，强制 YouTube 使用 HTTPS，确保脚本解密生效
+AND, ((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)), REJECT
+AND, ((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)), REJECT
+
+[Rewrite]
+# 拦截视频播放前的广告初始化请求
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad reject-200
+
+[Script]
+# YouTube 综合增强脚本：处理广告移除、界面简化及翻译
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/YouTube(Music)Enhance.js, requires-body=true, binary-body-mode=true, argument="blockUpload={blockUpload}&blockShorts={blockShorts}&blockImmersive={blockImmersive}&captionLang={captionLang}&lyricLang={lyricLang}&debug={debug}", tag=YouTube增强
+
+[MitM]
+hostname = *.googlevideo.com, youtubei.googleapis.com
