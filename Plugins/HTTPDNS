@@ -1,5 +1,5 @@
 #!name=HTTPDNS
-#!desc=高效拦截常见HTTPDNS服务，强制App回退至系统DNS以配合分流策略。
+#!desc=拦截常见HTTPDNS服务。
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/HTTPDNS.png
 #!date=2026-04-15
 
