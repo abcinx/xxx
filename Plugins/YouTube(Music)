@@ -9,7 +9,7 @@ blockShorts=switch, false, true, tag=隐藏(Shorts), desc=隐藏YouTube底栏的
 blockImmersive=switch, false, true, tag=隐藏(选段), desc=隐藏YouTube Music底栏的(选段)
 captionLang=select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=字幕翻译, desc=视频字幕默认翻译的目标语言
 lyricLang=select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=歌词翻译, desc=YouTube Music 歌词默认翻译的目标语言
-debug=switch, false, true, tag=启用调试模式, desc=开启后将在日志中输出详细重写信息
+debug=switch, false, true, tag=调试模式, desc=开启后将在日志中输出详细重写信息
 
 [Rule]
 AND, ((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)), REJECT
