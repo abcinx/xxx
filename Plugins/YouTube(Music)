@@ -5,11 +5,11 @@
 
 [Argument]
 blockUpload=switch, false, true, tag=隐藏 + 按钮, desc=隐藏 YouTube 底栏正中间的 "+" 按钮
-blockImmersive=switch, false, true, tag=隐藏选段按钮, desc=隐藏 YouTube Music 底栏的选段按钮
 blockShorts=switch, false, true, tag=隐藏Shorts按钮, desc=隐藏 YouTube 底栏的 Shorts 选项卡
-debug=switch, false, true, tag=启用调试模式, desc=开启后将在日志中输出详细重写信息
+blockImmersive=switch, false, true, tag=隐藏选段按钮, desc=隐藏 YouTube Music 底栏的选段按钮
 captionLang=select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=字幕翻译语言, desc=视频字幕默认翻译的目标语言
 lyricLang=select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=歌词翻译语言, desc=YouTube Music 歌词默认翻译的目标语言
+debug=switch, false, true, tag=启用调试模式, desc=开启后将在日志中输出详细重写信息
 
 [Rule]
 AND, ((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)), REJECT
@@ -20,5 +20,6 @@ AND, ((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)), REJECT
 
 [Script]
 http-response ^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch))(\?(.*))?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/YouTube(Music)Enhance.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}], tag=Youtube(Music)Enhance
+
 [MitM]
 hostname=*.googlevideo.com, youtubei.googleapis.com
