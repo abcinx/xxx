@@ -3,26 +3,28 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Spotify.PNG
 #!date=2026-04-15
 
+[Rule]
+# 1. 强制禁止 QUIC，确保流量走拦截通道
+AND,((DOMAIN-SUFFIX, spotify.com), (PROTOCOL, QUIC)),REJECT
+# 2. 屏蔽广告追踪与日志上报
+DOMAIN, ads-fa.spotify.com, REJECT
+DOMAIN, analytics.spotify.com, REJECT
+DOMAIN, crashdump.spotify.com, REJECT
+DOMAIN, log.spotify.com, REJECT
+
 [Rewrite]
-# 1. 强制刷新用户配置数据
-^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/user-customization-service\/v1\/customize header-del if-none-match
-
-# 2. 屏蔽广告、上报、AI DJ 及冗余服务 (合并正则提升性能)
-^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(pendragon|capping-api|partner-|pam-view-service|social-connect\/v.\/sessions) reject-dict
-
-# 3. 屏蔽特定 AI DJ 内容
-^https:\/\/spclient\.wg\.spotify\.com\/metadata\/4\/track\/37i9dQZF1EYkqdzj48dyYq reject-dict
+# 移除缓存验证，确保脚本始终生效
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/user-customization-service\/v1\/customize header-del if-none-match
+# 屏蔽会员中心冗余界面
+^https:\/\/.*-spclient\.spotify\.com\/pam-view-service\/ reject-dict
+# 屏蔽 AI DJ
+^https:\/\/.*-spclient\.spotify\.com\/.*37i9dQZF1EYkqdzj48dyYq reject-dict
 
 [Script]
-# Gabo 服务处理 (广告/追踪)
-http-request ^https:\/\/(.*-spclient|spclient\.wg)\.spotify\.com\/gabo-receiver-service script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-gabo.js, timeout=10, tag=Spotify-gabo
-
-# 视图层数据处理 (艺术家/专辑)
-http-request ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-json.js, timeout=10, tag=Spotify-json
-
-# 核心协议修改 (解锁 UI/切歌限制) - 采用 Eevee 逻辑
-http-response ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-proto.js, requires-body=true, binary-body-mode=true, timeout=10, tag=Spotify-proto
+# 广告过滤脚本
+http-request ^https:\/\/(.*-spclient\.spotify\.com|spclient\.wg\.spotify\.com)\/gabo-receiver-service script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-gabo.js, timeout=10, tag=Spotify_Ads
+# 核心功能解锁脚本 (Protobuf)
+http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$ script-path=https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-proto-eevee.js, requires-body=true, binary-body-mode=true, timeout=10, tag=Spotify_Unlock
 
 [Mitm]
-# 修正后的主机名匹配，覆盖所有 Spotify 相关业务子域名
 hostname = spclient.wg.spotify.com, *-spclient.spotify.com
