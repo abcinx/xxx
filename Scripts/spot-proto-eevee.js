@@ -28,7 +28,7 @@ const rules = [
         action: "remove"
     },
 
-
+    //capping+
     {
         name: "enable_free_on_demand_experiment",
         action: "remove"
@@ -1137,79 +1137,44 @@ if(resStatus !== 200) {
 }
 
 function modifyAssignedValues(values) {
-  // for (const rule of rules) {
-  //   const matchingIndices = values
-  //     .map((_, index) => index)
-  //     .filter((index) => {
-  //       const value = values[index];
-  //       const nameMatches =
-  //         rule.name != null
-  //           ? value.propertyId.name === rule.name
-  //           : true;
-  //       const scopeMatches =
-  //         rule.scope != null
-  //           ? value.propertyId.scope === rule.scope
-  //           : true;
-  //       return nameMatches && scopeMatches;
-  //     });
+  
+   for (const rule of rules) {
+     const matchingIndices = values
+       .map((_, index) => index)
+      .filter((index) => {
+      const value = values[index];
+        const nameMatches =
+          rule.name != null
+             ? value.propertyId.name === rule.name
+             : true;
+         const scopeMatches =
+           rule.scope != null
+             ? value.propertyId.scope === rule.scope
+             : true;
+         return nameMatches && scopeMatches;
+       });
 
-  //   for (const index of matchingIndices.sort((a, b) => b - a)) {
-  //     switch (rule.action) {
-  //       case "remove":
-  //         values.splice(index, 1);
-  //         break;
-
-  //       case "setBool":
-  //         values[index].boolValue = { value: rule.value };
-  //         break;
-
-  //       case "setEnum":
-  //         values[index].enumValue = { value: rule.value };
-  //         break;
-  //     }
-  //   }
-  // }
-  for (const rule of rules) {
-    const matchingIndices = [];
-
-    // 遍历搞定（替代 map + filter）
-    for (let i = 0; i < values.length; i++) {
-      const value = values[i];
-
-      const nameMatches =
-        rule.name != null
-          ? value.propertyId.name === rule.name
-          : true;
-
-      const scopeMatches =
-        rule.scope != null
-          ? value.propertyId.scope === rule.scope
-          : true;
-
-      if (nameMatches && scopeMatches) {
-        matchingIndices.push(i);
-      }
-    }
-
-    // 倒序删除
-    for (let i = matchingIndices.length - 1; i >= 0; i--) {
-      const index = matchingIndices[i];
-
-      switch (rule.action) {
-        case "remove":
-          values.splice(index, 1);
+    for (const index of matchingIndices.sort((a, b) => b - a)) {
+       switch (rule.action) {
+         case "remove":
+           values.splice(index, 1);
+            console.log(`删除${index}号字段`);
           break;
 
-        case "setBool":
-          values[index].boolValue = { value: rule.value };
-          break;
+         case "setBool":
+           values[index].boolValue = { value: rule.value };
+             console.log(`在${index}位置重设bool值`);
+           break;
 
-        case "setEnum":
-          values[index].enumValue = { value: rule.value };
-          break;
-      }
-    }
+         case "setEnum":
+           values[index].enumValue = { value: rule.value };
+            console.log(`在${index}位置重设enum值`);
+           break;
+       }
+     }
+     //console.log("==========");  
   }
+
   console.log("assignedValuesMapObj processed");
 }
 
@@ -1272,18 +1237,7 @@ function modifyAttributes(attributes) {
   console.log("accountAttributesMapObj processed");
 }
 
-
-// function modifyRemoteConfiguration(configuration) {
-//   modifyAttributes(configuration.attributes.accountAttributes);
-
-//   if (UserDefaults.overwriteConfiguration) {
-//     configuration.resolve.configuration = BundleHelper.shared.resolveConfiguration();
-//   } else {
-//     modifyAssignedValues(configuration.assignedValues);
-//   }
-// }
-
 function processMapObj(accountAttributesMapObj,assignedValuesMapObj) {
-    modifyAttributes(accountAttributesMapObj);
     modifyAssignedValues(assignedValuesMapObj);
+    modifyAttributes(accountAttributesMapObj);
 }
