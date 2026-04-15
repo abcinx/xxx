@@ -3,10 +3,6 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Spotify.PNG
 #!date=2026-04-15
 
-[Argument]
-tab=switch, false, true, tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
-useractivity=switch, true, false, tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
-
 [Rule]
 AND,((DOMAIN-SUFFIX, spotify.com), (PROTOCOL, QUIC)),REJECT
 
