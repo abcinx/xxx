@@ -12,7 +12,6 @@ debug=switch, false, true, tag=启用调试模式, desc=此插件的调试模式
 #lyricLang=select, "off", "zh-Hans", "zh-Hant", "ja", "ko", "en", tag=歌词翻译语言, desc=YouTube Music 歌词默认翻译的目标语言
 
 [Rule]
-DEST-PORT,443,REJECT-NO-DROP,udp
 AND, ((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)), REJECT
 AND, ((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)), REJECT
 
