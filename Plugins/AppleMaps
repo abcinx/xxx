@@ -1,7 +1,7 @@
 #!name=Apple Maps
 #!desc=将 Apple 地图请求区域重定向至美国 (US)，解锁海外版地图数据及功能。
 #!icon = https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/AppleMaps.PNG
-#!date=2026-04-02
+#!date=2026-04-15
 
 [URL Rewrite]
 # 强制修改国家代码为 US
