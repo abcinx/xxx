@@ -2,6 +2,7 @@
 #!desc=高级订阅管理工具.
 #!openUrl=https://sub.store
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Sub-Store.png
+#!date=2026-04-15
 
 [Argument]
 cron=input, "55 23 * * *", tag=定时参数, desc=这里需要输入符合CRON表达式的参数
