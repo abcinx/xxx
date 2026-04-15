@@ -1,0 +1,66 @@
+#!name=HTTPDNS
+#!desc=高效拦截常见HTTPDNS服务，强制App回退至系统DNS以配合分流策略。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/HTTPDNS.png
+#!date=2026-04-15
+
+[Rule]
+# --- 通用关键词拦截 ---
+DOMAIN-KEYWORD, httpdns, REJECT
+DOMAIN-KEYWORD, httpsdns, REJECT
+
+# --- 阿里系 ---
+DOMAIN, httpdns.alicdn.com, REJECT
+DOMAIN, httpdns-api.aliyuncs.com, REJECT
+DOMAIN, httpdns-sc.aliyuncs.com, REJECT
+DOMAIN, amdc.alipay.com, REJECT
+DOMAIN, httpdns.danuoyi.tbcache.com, REJECT
+IP-CIDR, 203.107.1.0/24, REJECT, no-resolve
+
+# --- 腾讯系 (精简版) ---
+DOMAIN, dns.weixin.qq.com, REJECT
+DOMAIN, dns.weixin.qq.com.cn, REJECT
+DOMAIN, aedns.weixin.qq.com, REJECT
+DOMAIN, httpdns.kg.qq.com, REJECT
+DOMAIN, twns.p2ptun.qq.com, REJECT
+DOMAIN, tp2p.kg.qq.com, REJECT
+IP-CIDR, 119.29.29.98/32, REJECT, no-resolve
+IP-CIDR, 119.29.29.99/32, REJECT, no-resolve
+# 微信/QQ 常用 HTTPDNS 节点
+IP-CIDR, 183.192.196.31/32, REJECT, no-resolve
+IP-CIDR, 123.151.48.0/24, REJECT, no-resolve
+
+# --- 百度系 ---
+DOMAIN, httpdns.baidu.com, REJECT
+DOMAIN, httpsdns.baidu.com, REJECT
+DOMAIN, dns.iqiyi.com, REJECT
+IP-CIDR, 180.76.76.200/32, REJECT, no-resolve
+
+# --- 字节/头条/抖音 ---
+DOMAIN, dotserver.douyucdn.cn, REJECT
+DOMAIN, httpdns.bilivideo.com, REJECT
+
+# --- 手机厂商 ---
+DOMAIN, httpdns.browser.miui.com, REJECT
+DOMAIN, resolver.msg.xiaomi.net, REJECT
+DOMAIN, httpdns.platform.dbankcloud.com, REJECT
+DOMAIN, httpdns.ocloud.heytapmobi.com, REJECT
+DOMAIN, httpdns.push.oppomobile.com, REJECT
+
+# --- 网易 ---
+DOMAIN, httpdns.music.163.com, REJECT
+DOMAIN, music.httpdns.c.163.com, REJECT
+IP-CIDR, 59.111.239.61/32, REJECT, no-resolve
+
+# --- 复杂正则优化 (仅保留必须部分) ---
+# 匹配直接使用 IP 访问的常见 HTTPDNS 解析路径
+URL-REGEX, ^http://\d+\.\d+\.\d+\.\d+/v?\d*/(d|ss|resolve)\?, REJECT
+URL-REGEX, ^http://\[[a-fA-F0-9:]+\]/v?\d*/(d|ss|resolve)\?, REJECT
+
+[Rewrite]
+# 网易云/邮箱等特殊拦截
+^https?://appconf\.mail\.163\.com/mailmaster/api/http/urlConfig\.do$ reject-dict
+^https?://cdn\.wup\.huya\.com/monitor/monitor\.jsp reject
+^https://ucdc\d?-upaas\.uc\.cn/api/v\d/dns_query\? reject-dict
+
+[MitM]
+hostname = appconf.mail.163.com, ucdc*-upaas.uc.cn, cdn.wup.huya.com
