@@ -3,6 +3,11 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 #!date=2026-04-15
 
+[Argument]
+blockUpload=switch, false, true, tag=隐藏(+), desc=隐藏YouTube底栏正中间的(+)
+blockShorts=switch, false, true, tag=隐藏(Shorts), desc=隐藏YouTube底栏的(Shorts)
+blockImmersive=switch, false, true, tag=隐藏(选段), desc=隐藏YouTube Music底栏的(选段)
+
 [Rule]
 AND, ((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)), REJECT
 AND, ((DOMAIN-SUFFIX, youtubei.googleapis.com), (PROTOCOL, QUIC)), REJECT
