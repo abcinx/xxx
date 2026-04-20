@@ -9,8 +9,16 @@ DOMAIN,aet.spotify.com,REJECT
 
 [Rewrite]
 ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize header-del if-none-match
+^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon reject-dict
+
+#屏蔽播放界面的探索内容显示，凭个人喜好开关
+#^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/watch-feed-entrypoints\/v.\/discovery-from-seed reject-dict
+
+#屏蔽设置界面会员信息，仅改变显示，可以删去
 #^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ reject-dict
+#屏蔽AI DJ的url
 #37i9dQZF1EYkqdzj48dyYq reject-dict
+
 [Script]
 http-request ^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/Spotify-gabo.js, timeout=10, tag=spotify-gabo
 http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Scripts/spot-NoScrollAd.js, requires-body=true, binary-body-mode=true, timeout=10, tag=scroll_noAd
