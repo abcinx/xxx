@@ -417,4 +417,5 @@ DOMAIN-SUFFIX, rixengine.com, REJECT
 
 DOMAIN-SUFFIX, amazon-adsystem.com, REJECT
 
-
+AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL, QUIC)),REJECT
+DOMAIN,aet.spotify.com,REJECT
