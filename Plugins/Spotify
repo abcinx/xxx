@@ -23,7 +23,7 @@ DOMAIN,aet.spotify.com,REJECT
 #^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ reject-dict
 
 #屏蔽AI DJ的url
-37i9dQZF1EYkqdzj48dyYq reject-dict
+#37i9dQZF1EYkqdzj48dyYq reject-dict
 
 [Mitm]
 hostname = spclient.wg.spotify.com, *spclient.spotify.com
