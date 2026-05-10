@@ -1,0 +1,104 @@
+#default config
+#Date: 2026.03.18
+#Author: Loon
+#----------------------------------------
+[General]
+ip-mode = v4-only
+ipv6-vif = auto
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlytics.com
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+dns-server = system,223.5.5.5,119.29.29.29
+doh-server = https://doh.pub/dns-query
+doh3-server = https://dns.alidns.com/dns-query
+sni-sniffing = true
+disable-stun = true
+dns-reject-mode = LoopbackIP
+domain-reject-mode = DNS
+udp-fallback-mode = REJECT
+allow-wifi-access = false
+wifi-access-http-port = 7222
+wifi-access-socks5-port = 7221
+proxy-test-url = http://www.gstatic.com/generate_204
+internet-test-url = http://captive.apple.com/generate_204
+test-timeout = 5
+interface-mode = auto
+disconnect-on-policy-change = false
+#----------------------------------------
+[Proxy]
+#----------------------------------------
+[Remote Proxy]
+Aa = https://abcx.ccwu.cc/sub?token=5625bc4335d8749b4f6a042377bf2185,udp=true,block-quic=true,fast-open=default,vmess-aead=true,skip-cert-verify=false,enabled=true,flexible-sni=true
+Mitce = https://app.mitce.net/?sid=471666&token=srvpwzve,udp=true,block-quic=true,fast-open=default,vmess-aead=true,skip-cert-verify=false,enabled=true,flexible-sni=true
+#----------------------------------------
+[Proxy Chain]
+#----------------------------------------
+[Proxy Group]
+Available = fallback,JP_Filter,interval = 3600,max-timeout = 5,img-url = list.bullet.circle.fill
+Manual = select,ALL_Filter,img-url = checkmark.circle.fill
+Telegram = select,JP_Filter,SG_Filter,img-url = bubble.left.circle.fill
+YouTube = select,JP_Filter,Aa,img-url = play.tv.fill
+#----------------------------------------
+[Remote Filter]
+ALL_Filter = NodeSelect, FilterKey = ".*"
+HK_Filter = NodeSelect, FilterKey = "(?i)(港|HK|Hongkong)"
+JP_Filter = NodeSelect, FilterKey = "(?i)(日本|JP|Japan)"
+SG_Filter = NodeSelect, FilterKey = "(?i)(新加坡|SG|Singapore)"
+KR_Filter = NameRegex, FilterKey = "(?i)(韩国|KR|Korea)"
+TW_Filter = NameRegex, FilterKey = "(?i)(台湾|TW|Taiwan)"
+US_Filter = NodeSelect, FilterKey = "(?i)(美国|US|United States)"
+UK_Filter = NameRegex, FilterKey = "(?i)(英国|UK|United Kingdom)"
+#----------------------------------------
+[Remote Rule]
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Rules/Telegram, policy=Telegram, tag=Telegram, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Rules/YouTube, policy=YouTube, tag=YouTube, enabled=true
+#----------------------------------------
+[Rule]
+# DNS Leak
+DOMAIN-SUFFIX,dnsleaktest.com,Available
+DOMAIN-SUFFIX,dnsleak.com,Available
+DOMAIN-SUFFIX,expressvpn.com,Available
+DOMAIN-SUFFIX,nordvpn.com,Available
+DOMAIN-SUFFIX,surfshark.com,Available
+DOMAIN-SUFFIX,ipleak.net,Available
+DOMAIN-SUFFIX,perfect-privacy.com,Available
+DOMAIN-SUFFIX,browserleaks.com,Available
+DOMAIN-SUFFIX,browserleaks.org,Available
+DOMAIN-SUFFIX,vpnunlimited.com,Available
+DOMAIN-SUFFIX,whoer.net,Available
+DOMAIN-SUFFIX,whrq.net,Available
+DOMAIN-SUFFIX,test-ipv6.com,Available
+DOMAIN-SUFFIX,ipv6-test.com,Available
+DOMAIN-SUFFIX,dnscheck.tools,Available
+DOMAIN-SUFFIX,pixelscan.net,Available
+DOMAIN-SUFFIX,ip.sb,Available
+DOMAIN-SUFFIX,ipapi.co,Available
+#LAN
+IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+IP-CIDR,224.0.0.0/3,DIRECT,no-resolve
+IP-CIDR6,fc00::/7,DIRECT,no-resolve
+IP-CIDR6,fe80::/10,DIRECT,no-resolve
+IP-CIDR6,ff00::/8,DIRECT,no-resolve
+#China
+GEOIP,CN,DIRECT
+#Final
+FINAL,Available
+#----------------------------------------
+[Rewrite]
+#----------------------------------------
+[Script]
+#----------------------------------------
+[Plugin]
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/Adblock, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/YouTube, enabled=false
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/AppleMaps, enabled=false
+#----------------------------------------
+[Mitm]
+hostname =
+ca-p12 = MIIJ/wIBAzCCCcUGCSqGSIb3DQEHAaCCCbYEggmyMIIJrjCCBCIGCSqGSIb3DQEHBqCCBBMwggQPAgEAMIIECAYJKoZIhvcNAQcBMFcGCSqGSIb3DQEFDTBKMCkGCSqGSIb3DQEFDDAcBAgDxezQ61g24gICCAAwDAYIKoZIhvcNAgkFADAdBglghkgBZQMEASoEEIs7L1p96CTIUSillZ0uOFOAggOg+Znx8yu3p8kZIsm75xJvuMyXtc/A3HIxiMS//bF1B/p1oizqeIddq3y4DatsMFLJFKf/2YORzN/P+G8xXFkrKxA0+R46un98xI6jpWd6ovKdHrxylN+nHT05hvDaszDqAvuJGoDB11h3d+nDVQld+fECJaMc7XEDY89jvtLlpINyXcXku5NRh0SEHC72CjL5WNhyxzVXo6ksx9cAEBM9sPpyCx8Kb2AD1xdfMXOfI2kGM+toZ6211xyyFz09uiiCUldvA7QCVpNR/hv1thRRyECeVeUXIM0oB3SGOi6aTpfunkS2+lHQ55pM2iufMXxyS5W/CeFAwVxtN2y0sMz2/js/WmEsop+oFw3dfCGPSSzss3Mm6anU69ra08W1AYpHtqKXcTcJ+dsFZh0qN15QPeAOXQdoq2IJ7gueFS3VvJpa2SA6oJWKu1aCOUtuiaupb3F4xkBmtdxKSpxI6lrB5vJq2w5xiZVBW7pK7RrbHe83YjQnc2Zrpe2nwVDS+rj+hRYcKdoNEEarEmwkKLoAtDnrQdGDiorLzJnGLaCmsjBpvvsSTD3FV9Bm5WX1flTX67hSO0x3ZRrRDG5AM8bJomNVhIlXbrCYmY4aySiUWVWhMSRCE4m0NvDA4YYZFFq0wAPYwGRXBKE9HbuFHnCNpSAffKAxHqVN4wg8sOQ1jte5icUIs16ngRgn9xX/aXxim7VMq7St8OzFzcYxXcAw56YEA2y9lt6JGyKSJQmDiT13y6bzmQx1+AmOEgdoOF2hQrl/Y+v1rClunorvb3YsXbF6atzlts7AQTqo6LUhZEthu/kzwoWEJhVxyMrK2jioMRhqgH3U53WGZfnXh1D6p6NWlLNPi1S2qGoX+UbC6T6wbSz2M5p3dfMglMZ+Ae8sUgLTcAnZ/Dqi3rP8LCGvjqUj8cvhHHSBXGICUg83saL2+nw+6lUweKOdHu/Sdaj452H3fK6VV8VFlt59jAKdgN9uPBlXccnsM8E/34lsbVuklZAo5vfabUWv3aI+LzseBR6z0YmyHdnFnZMCs0/1Dv9I5C9jJUgnzjzQza/voXnr3PfBU0HaP3SRaNNWdG+kpSs/x1r/X6+PSX/eA97sTBbbFcR0sCd49l5qs+pATPcknHbVPUmg6paRQNJ6H3iRQR3OALTsq8kwkNIolG3FKRWl04lfjrNQK6bqLYFgde/ReAO0NRDqp02VVJ4drkGz53iOW/XYBzgFojV/yL/BZjCCBYQGCSqGSIb3DQEHAaCCBXUEggVxMIIFbTCCBWkGCyqGSIb3DQEMCgECoIIFMTCCBS0wVwYJKoZIhvcNAQUNMEowKQYJKoZIhvcNAQUMMBwECIyVttpYR8J5AgIIADAMBggqhkiG9w0CCQUAMB0GCWCGSAFlAwQBKgQQVqmers1x/WUnR4DHPwpzHgSCBNAWkfnfKrjQ8yTOkN9Ja6JFWY6Msf+J6JKKJ0Z4fhl6pde2kLSSe1XJIp2ob/Dd+OE+V+d6RxpMEMhDQZpkt3KKBtuPmj7f2yrTIM5AzfsPVRxx1efoveTLn2fWX6waYP/FpPK3U9yKwGe9NlnPS0nWoYzs5YwOfQHwdxWRl+OOZiNLTSBX6XDszlm8n9TKep34l21C+t/iqtM6xHFtWa/e8j6rSZJJiVm0qZ1CClGYCrZfentNVhT2/alR4cpA48aJspFGppcazJDNbqV5UidHUxxAnQ+VR5AHJjtEUh5vMowXdWqPAj7caP48AVMV5zLIvxLqMeQxovA/qyxnQU2ARIOEY3Arl1OKWve1Gl6M/IRLF7qVq8HWAG4vTHkRmx3QwPlNWKSkclgIs+g9XGSPzsaPi5mP7VQp8mWB7v7fOdiUsHBNut7YQXN7b/ixy08xwRXXsD8A4XPFtJkRYny3rRC3QR3zBj7+YCwPviA4CiUgaR6/s9012uOATFDlTlLobfs3AD5rZdzeoUgNmjJ09kusz4eXHjFrkE0ooAUOJqqQVHGbl0ROg2YGkuwqKTMSRkh5HqnYyDUoSSScUGl6Udfi0mlGvgZYqA64ZY40YPeHh4d5hteDhBVqFK8PMIioP7NTsOphUJyPLho4dq/T/EWdbnxijrvXPFGUa8Zy7jhAjlqnKt8uFtFKLx1HQswwKvt7ZIG1xz6Vzw9tlBd9db1mbTdIwCWvaIdXr1xAjujtTwENLCs2Hw1B0pId2V/C1YHUeezaVJ6ZQ8ExbewHTh7KSEOkC7weFFCbjcOlSf2Udia2axT0svLyOgGEtcKeUf4aoQqESxZa10jeKJg6rE4ebwNj6Yt30Kjc+fmeSd+YduSBOGIA4rKpLMvx/H1yV5mKXz7DmdAsoSDjAOTtzcZjBPProB62G98rw7XBvX31NQrcdRLGLC83OwwMlDJGS21KvKv826ryOaHr96DOC/clhk+j37EBbZ3z5KOSyR4wAX7EPW9g6AndEi0MqY0BOhblZUXweD8yLJIlHIsgkstpUK4/wmrV74jSP8nLc6FLY3Jx+dsFYCrzKDdhroh1TJ0fK3wkcFRA0ZDWXfd8wXBcjzt0D6rWkcA7lX/gY6FKLLxqFWGyaqOUPsCbEM9BxxEyB9OETdJN7mp8X60/aCUFrxgN28HBHi49FGQVdUf5MdNgOAfd2Qq+/ywIhl/DsArNaoPHvSiVlkLKlDLJtjMNwFiJNv5+q15/PjOTy+pm6Zp6exe7P2RWCTIXWQjIA//TbZD+k1rqSFxEsZw9ZjqhJXpl0EaNeap8f3MEcmEn350wlH8GNRkoF4RJNxR5u3HZkbo2wD0akYyaEMvcgcnk4eYebomP0iboGu0kuzn4Ftx3qldccS48ejimakWRhCMGYpI6vVah1RspHWXtxkz9ehjj3jEUsSYXBvHPNKGpCvlMv1pr0FSFPBG0aB0jgIblGd/I0jXgl1+wv9cdERsNPOit1NhWnNVX50kyZ49pQD0GbfDajtk8C4OIIlkN79AR26Cmm1Kyjd38z4yQFVM9qCLsK/q5zlwkFpZ7NN5VxLrix0vSJ/G/fD/YIfbpB+SO3Lgo+seGknBv/qwqwC5DCL0z6SmV2TVqQ2WMTjElMCMGCSqGSIb3DQEJFTEWBBRLv1HXXz8C2I9vhF4ZQriFQR6oVjAxMCEwCQYFKw4DAhoFAAQUR8bzvWEVdI1gwFepUaLNMU2Pe/oECHy71g+MRU/TAgIIAA==
+ca-passphrase = 5J89BD8L
+skip-server-cert-verify = false
+#----------------------------------------
