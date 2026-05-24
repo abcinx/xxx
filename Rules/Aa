@@ -1,0 +1,32 @@
+# YouTube & YouTube Music
+DOMAIN-SUFFIX,music.youtube.com,YouTube
+DOMAIN-SUFFIX,youtube.com,YouTube
+DOMAIN-SUFFIX,youtube,YouTube
+DOMAIN-SUFFIX,youtu.be,YouTube
+DOMAIN-SUFFIX,yt.be,YouTube
+DOMAIN-SUFFIX,googlevideo.com,YouTube
+DOMAIN-SUFFIX,ytimg.com,YouTube
+DOMAIN-SUFFIX,ggpht.com,YouTube
+DOMAIN-SUFFIX,gvt1.com,YouTube
+DOMAIN-SUFFIX,gvt2.com,YouTube
+DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com,YouTube
+DOMAIN-KEYWORD,youtube,YouTube
+USER-AGENT,"*youtube*",YouTube
+USER-AGENT,"*YouTubeMusic*",YouTube
+IP-CIDR,172.110.32.0/21,YouTube,no-resolve
+IP-CIDR,216.73.80.0/20,YouTube,no-resolve
+# DNS Leak
+DOMAIN-SUFFIX,ipleak.net,PROXY
+DOMAIN-SUFFIX,browserleaks.com,PROXY
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY
+DOMAIN-SUFFIX,test-ipv6.com,PROXY
+#LAN
+IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+IP-CIDR,224.0.0.0/3,DIRECT,no-resolve
+IP-CIDR6,fc00::/7,DIRECT,no-resolve
+IP-CIDR6,fe80::/10,DIRECT,no-resolve
+IP-CIDR6,ff00::/8,DIRECT,no-resolve
