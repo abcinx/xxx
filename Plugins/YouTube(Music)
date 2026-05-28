@@ -1,7 +1,6 @@
-#!name=Youtube(Music)
+#!name=YouTube&YouTubeMusic
 #!desc=去除广告，功能增强！
-#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
-#!date=2026-04-15
+#!date=2026-05-28
 
 [Argument]
 blockUpload=switch, false, true, tag=隐藏(+), desc=隐藏YouTube底栏正中间的(+)
