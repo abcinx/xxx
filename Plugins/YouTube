@@ -1,5 +1,6 @@
 #!name=YouTube
 #!desc=去除广告，功能增强。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 #!date=2026-06-29
 [Rule]
 AND,((DOMAIN-SUFFIX, googlevideo.com), (PROTOCOL, QUIC)),REJECT
