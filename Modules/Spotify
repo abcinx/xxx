@@ -1,7 +1,7 @@
 #!name=Spotify
 #!desc=去除广告，功能增强！
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Spotify.PNG
-#!date=001
+#!date=2026-06-29
 
 [Rule]
 AND,((DOMAIN-SUFFIX, spotify.com), (PROTOCOL, QUIC)),REJECT
