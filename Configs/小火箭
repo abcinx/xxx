@@ -1,0 +1,256 @@
+# Shadowrocket: 2026-06-30 12:15:27
+[General]
+bypass-system = true
+skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com
+tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32
+dns-server = 223.5.5.5, 119.29.29.29
+doh-server = https://dns.alicdn.com/dns-query, https://doh.pub/dns-query
+fallback-dns-server = system
+
+# Enable full IPv6 support
+ipv6 = true
+prefer-ipv6 = false
+
+# If a domain uses the direct policy, after enabling this, Shadowrocket will use the system DNS to resolve it.
+dns-direct-system = false
+
+# If true, Shadowrocket will automatically reply to ICMP packets.
+icmp-auto-reply = true
+
+# If true, Shadowrocket always executes reject urlrewrite rules even though the global routing is not config.
+always-reject-url-rewrite = false
+
+# If false, the domain resolution returns a private IP and Shadowrocket assumes that the domain is hijacked and forces the use of a proxy.
+private-ip-answer = true
+
+# If a domain uses the direct policy, automatically switch to the proxy rule if direct DNS resolution fails.
+dns-direct-fallback-proxy = false
+
+# The fallback behavior when UDP traffic matches a policy that doesn't support the UDP relay. Possible values: DIRECT, REJECT.
+udp-policy-not-supported-behaviour = REJECT
+
+# By default, DNS lookup is always performed on the remote server with a proxy policy.
+# If true, Shadowrocket will use the mapped address for the proxy connection instead of the host if a local DNS mapping exists.
+use-local-host-item-for-proxy = false
+
+[Proxy Group]
+Spotify = select,PROXY,DIRECT,policy-select-name=DIRECT
+Telegram = select, Proxy
+YouTube = select,PROXY,JP|官方优选|1,use=true,policy-select-name=JP|官方优选|1
+Google = select,PROXY
+
+[Rule]
+# Block HTTP3/QUIC
+# AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
+
+# Spotify
+DOMAIN-SUFFIX,spotify.com,SPOTIFY
+DOMAIN-SUFFIX,spotifycdn.com,SPOTIFY
+DOMAIN-SUFFIX,spotifycdn.net,SPOTIFY
+DOMAIN-SUFFIX,scdn.co,SPOTIFY
+DOMAIN-SUFFIX,spoti.fi,SPOTIFY
+DOMAIN-SUFFIX,byspotify.com,SPOTIFY
+DOMAIN-SUFFIX,pscdn.co,SPOTIFY
+DOMAIN-SUFFIX,tospotify.com,SPOTIFY
+DOMAIN-SUFFIX,spotify-everywhere.com,SPOTIFY
+DOMAIN-SUFFIX,spotifycharts.com,SPOTIFY
+DOMAIN-SUFFIX,spotifycodes.com,SPOTIFY
+DOMAIN-SUFFIX,spotifydesign.com,SPOTIFY
+DOMAIN-SUFFIX,spotifyjobs.com,SPOTIFY
+DOMAIN-SUFFIX,spotifyforbrands.com,SPOTIFY
+DOMAIN-SUFFIX,spotify.link,SPOTIFY
+DOMAIN,audio-ak-spotify-com.akamaized.net,SPOTIFY
+DOMAIN,audio4-ak-spotify-com.akamaized.net,SPOTIFY
+DOMAIN,heads-ak-spotify-com.akamaized.net,SPOTIFY
+DOMAIN,heads4-ak-spotify-com.akamaized.net,SPOTIFY
+DOMAIN,spotify.com.edgesuite.net,SPOTIFY
+DOMAIN,spotify.map.fastly.net,SPOTIFY
+DOMAIN,spotify.map.fastlylb.net,SPOTIFY
+DOMAIN,cdn-spotify-experiments.conductrics.com,SPOTIFY
+DOMAIN-KEYWORD,spotify,SPOTIFY
+
+# Telegram
+DOMAIN-SUFFIX,t.me,TELEGRAM
+DOMAIN-SUFFIX,tdesktop.com,TELEGRAM
+DOMAIN-SUFFIX,telegra.ph,TELEGRAM
+DOMAIN-SUFFIX,telegram.me,TELEGRAM
+DOMAIN-SUFFIX,telegram.org,TELEGRAM
+DOMAIN-SUFFIX,telesco.pe,TELEGRAM
+DOMAIN-SUFFIX,tg.me,TELEGRAM
+DOMAIN-SUFFIX,telegram.space,TELEGRAM
+DOMAIN-KEYWORD,telegram,TELEGRAM
+IP-CIDR,91.108.4.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.108.8.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.108.12.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.108.16.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.108.20.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.108.56.0/22,TELEGRAM,no-resolve
+IP-CIDR,91.105.192.0/23,TELEGRAM,no-resolve
+IP-CIDR,109.239.140.0/24,TELEGRAM,no-resolve
+IP-CIDR,149.154.160.0/20,TELEGRAM,no-resolve
+IP-CIDR,185.76.36.0/22,TELEGRAM,no-resolve
+IP-CIDR6,2001:B28:F23D::/48,TELEGRAM,no-resolve
+IP-CIDR6,2001:B28:F23F::/48,TELEGRAM,no-resolve
+IP-CIDR6,2001:67C:4E8::/48,TELEGRAM,no-resolve
+IP-CIDR6,2A0A:F280::/32,TELEGRAM,no-resolve
+
+# YouTube
+DOMAIN-SUFFIX,youtube.com,YOUTUBE
+DOMAIN-SUFFIX,youtubei.googleapis.com,YOUTUBE
+DOMAIN-SUFFIX,youtu.be,YOUTUBE
+DOMAIN-SUFFIX,youtube-nocookie.com,YOUTUBE
+DOMAIN-SUFFIX,googlevideo.com,YOUTUBE
+DOMAIN-SUFFIX,ytimg.com,YOUTUBE
+DOMAIN-SUFFIX,ytimg.l.google.com,YOUTUBE
+DOMAIN-SUFFIX,ggpht.com,YOUTUBE
+DOMAIN-SUFFIX,gvt1.com,YOUTUBE
+DOMAIN-SUFFIX,gvt2.com,YOUTUBE
+DOMAIN-SUFFIX,nhacmp3youtube.com,YOUTUBE
+DOMAIN-SUFFIX,withyoutube.com,YOUTUBE
+DOMAIN-SUFFIX,youtu-be.com,YOUTUBE
+DOMAIN-SUFFIX,youtubeeducation.com,YOUTUBE
+DOMAIN-SUFFIX,youtubegaming.com,YOUTUBE
+DOMAIN-SUFFIX,youtube-ui.l.google.com,YOUTUBE
+DOMAIN-SUFFIX,youtubekids.com,YOUTUBE
+DOMAIN-SUFFIX,youtubemaven.com,YOUTUBE
+DOMAIN-SUFFIX,youtubepartner.com,YOUTUBE
+DOMAIN-SUFFIX,youtubemals.com,YOUTUBE
+DOMAIN-SUFFIX,youtubego.com,YOUTUBE
+DOMAIN-SUFFIX,youtube.da.netflix.com,YOUTUBE
+DOMAIN-SUFFIX,youtube.l.google.com,YOUTUBE
+DOMAIN-SUFFIX,music.youtube.com,YOUTUBE
+DOMAIN-SUFFIX,youtube-music.l.google.com,YOUTUBE
+DOMAIN,music-paid-api.youtube.com,YOUTUBE
+DOMAIN-KEYWORD,youtube,YOUTUBE
+DOMAIN-KEYWORD,googlevideo,YOUTUBE
+
+# Google
+DOMAIN-SUFFIX,google.com,GOOGLE
+DOMAIN-SUFFIX,google.com.hk,GOOGLE
+DOMAIN-SUFFIX,google.co.jp,GOOGLE
+DOMAIN-SUFFIX,gmail.com,GOOGLE
+DOMAIN-SUFFIX,blogspot.com,GOOGLE
+DOMAIN-SUFFIX,chrome.com,GOOGLE
+DOMAIN-SUFFIX,chromium.org,GOOGLE
+DOMAIN-SUFFIX,getmdl.io,GOOGLE
+DOMAIN-SUFFIX,google-analytics.com,GOOGLE
+DOMAIN-SUFFIX,googleadservices.com,GOOGLE
+DOMAIN-SUFFIX,googleanalytics.com,GOOGLE
+DOMAIN-SUFFIX,googlecode.com,GOOGLE
+DOMAIN-SUFFIX,googledrive.com,GOOGLE
+DOMAIN-SUFFIX,googleearth.com,GOOGLE
+DOMAIN-SUFFIX,googleisnotevil.com,GOOGLE
+DOMAIN-SUFFIX,googlemaps.com,GOOGLE
+DOMAIN-SUFFIX,googlepagelegends.com,GOOGLE
+DOMAIN-SUFFIX,googlescholar.com,GOOGLE
+DOMAIN-SUFFIX,googleusercontent.com,GOOGLE
+DOMAIN-SUFFIX,googlevideo.com,GOOGLE
+DOMAIN-SUFFIX,googlezip.net,GOOGLE
+DOMAIN-SUFFIX,gstatic.com,GOOGLE
+DOMAIN-SUFFIX,gstatic.net,GOOGLE
+DOMAIN-SUFFIX,ggpht.com,GOOGLE
+DOMAIN-SUFFIX,googleartsetting.com,GOOGLE
+DOMAIN-SUFFIX,googleapis.com,GOOGLE
+DOMAIN-SUFFIX,google-me.com,GOOGLE
+DOMAIN-SUFFIX,googleplay.com,GOOGLE
+DOMAIN-SUFFIX,googlemail.com,GOOGLE
+DOMAIN-SUFFIX,googlesource.com,GOOGLE
+DOMAIN-SUFFIX,googletoad.com,GOOGLE
+DOMAIN-SUFFIX,goo.gl,GOOGLE
+DOMAIN-SUFFIX,recaptcha.net,GOOGLE
+DOMAIN-SUFFIX,google-analytics.com,GOOGLE
+DOMAIN-SUFFIX,doubleclick.net,GOOGLE
+DOMAIN-SUFFIX,gvt0.com,GOOGLE
+DOMAIN-SUFFIX,gvt1.com,GOOGLE
+DOMAIN-SUFFIX,gvt2.com,GOOGLE
+DOMAIN-SUFFIX,gvt3.com,GOOGLE
+DOMAIN-SUFFIX,app-measurement.com,GOOGLE
+DOMAIN-SUFFIX,admeld.com,GOOGLE
+DOMAIN-SUFFIX,keyhole.com,GOOGLE
+DOMAIN-SUFFIX,panoramio.com,GOOGLE
+DOMAIN-SUFFIX,urchin.com,GOOGLE
+DOMAIN-SUFFIX,firebaseio.com,GOOGLE
+DOMAIN-SUFFIX,firebase.com,GOOGLE
+DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,GOOGLE
+IP-CIDR,8.8.8.8/32,GOOGLE,no-resolve
+IP-CIDR,8.8.4.4/32,GOOGLE,no-resolve
+IP-CIDR6,2001:4860:4860::8888/128,GOOGLE,no-resolve
+IP-CIDR6,2001:4860:4860::8844/128,GOOGLE,no-resolve
+DOMAIN-KEYWORD,google,GOOGLE
+DOMAIN-KEYWORD,gmail,GOOGLE
+
+# Apple IPv4 Blocks
+IP-CIDR,17.0.0.0/8,DIRECT,no-resolve
+
+# Apple IPv6 Blocks
+IP-CIDR,2620:149::/32,DIRECT,no-resolve
+IP-CIDR,2403:300::/32,DIRECT,no-resolve
+IP-CIDR,2A01:B740::/32,DIRECT,no-resolve
+
+# Apple Intelligence, Siri
+# https://support.apple.com/en-us/101555
+DOMAIN-SUFFIX,apple-relay.akamaized.net,PROXY
+DOMAIN-SUFFIX,apple-relay.apple.com,PROXY
+DOMAIN-SUFFIX,apple-relay.cloudflare.com,PROXY
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com,PROXY
+
+# Copilot
+DOMAIN,copilot.microsoft.com,PROXY
+DOMAIN,copilot.bing.com,PROXY
+
+# CNAME for apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net,PROXY
+
+# Remove these lines below if you don't have trouble accessing Apple resources
+DOMAIN,www-cdn.icloud.com.akadns.net,DIRECT
+DOMAIN-SUFFIX,aaplimg.com,DIRECT
+DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+DOMAIN-SUFFIX,apple.co,DIRECT
+DOMAIN-SUFFIX,apple.com,DIRECT
+DOMAIN-SUFFIX,apple.news,DIRECT
+DOMAIN-SUFFIX,apple.com.cn,DIRECT
+DOMAIN-SUFFIX,appstore.com,DIRECT
+DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,crashlytics.com,DIRECT
+DOMAIN-SUFFIX,icloud-content.com,DIRECT
+DOMAIN-SUFFIX,icloud.com,DIRECT
+DOMAIN-SUFFIX,icloud.com.cn,DIRECT
+DOMAIN-SUFFIX,me.com,DIRECT
+DOMAIN-SUFFIX,mzstatic.com,DIRECT
+DOMAIN-SUFFIX,v2ex.com,PROXY
+
+# DNS Leak
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY
+DOMAIN-SUFFIX,dnsleak.com,PROXY
+DOMAIN-SUFFIX,expressvpn.com,PROXY
+DOMAIN-SUFFIX,nordvpn.com,PROXY
+DOMAIN-SUFFIX,surfshark.com,PROXY
+DOMAIN-SUFFIX,ipleak.net,PROXY
+DOMAIN-SUFFIX,perfect-privacy.com,PROXY
+DOMAIN-SUFFIX,browserleaks.com,PROXY
+DOMAIN-SUFFIX,browserleaks.org,PROXY
+DOMAIN-SUFFIX,vpnunlimited.com,PROXY
+DOMAIN-SUFFIX,whoer.net,PROXY
+DOMAIN-SUFFIX,whrq.net,PROXY
+
+# LAN
+IP-CIDR,192.168.0.0/16,DIRECT
+IP-CIDR,10.0.0.0/8,DIRECT
+IP-CIDR,172.16.0.0/12,DIRECT
+IP-CIDR,127.0.0.0/8,DIRECT
+
+# China
+GEOIP,CN,DIRECT
+
+# Final
+FINAL,PROXY
+
+[Host]
+localhost = 127.0.0.1
+
+[MITM]
+hostname = 
+ca-passphrase = Ukh8hEH0
+ca-p12 = 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
+h2 = true
+enable = true
