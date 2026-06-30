@@ -1,0 +1,81 @@
+#default config
+#Date: 2022.06.01
+#Author: Loon
+
+[General]
+ip-mode = v4-only
+ipv6-vif = auto
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlytics.com
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+dns-server = 223.5.5.5,119.29.29.29
+doh-server = https://doh.pub/dns-query
+doh3-server = https://dns.alidns.com/dns-query
+sni-sniffing = true
+disable-stun = true
+dns-reject-mode = LoopbackIP
+domain-reject-mode = DNS
+udp-fallback-mode = REJECT
+allow-wifi-access = false
+wifi-access-http-port = 7222
+wifi-access-socks5-port = 7221
+proxy-test-url = http://www.gstatic.com/generate_204
+internet-test-url = http://captive.apple.com/generate_204
+test-timeout = 5
+interface-mode = auto
+disconnect-on-policy-change = false
+
+[Proxy]
+
+[Remote Proxy]
+
+
+[Proxy Chain]
+
+[Proxy Group]
+PROXY = select,Auto,Mitce,Aa,img-url = shippingbox.circle
+Auto = url-test,JP_Filter,interval = 1800,tolerance = 50,img-url = shippingbox.circle
+
+[Remote Filter]
+ALL_Filter = NameRegex, FilterKey = ".*"
+HK_Filter = NameRegex, FilterKey = "(?i)(港|HK|Hongkong)"
+JP_Filter = NameRegex, FilterKey = "(?i)(日本|JP|Japan)"
+SG_Filter = NameRegex, FilterKey = "(?i)(新加坡|SG|Singapore)"
+KR_Filter = NameRegex, FilterKey = "(?i)(韩国|KR|Korea)"
+TW_Filter = NameRegex, FilterKey = "(?i)(台湾|TW|Taiwan)"
+US_Filter = NameRegex, FilterKey = "(?i)(美国|US|United States)"
+UK_Filter = NameRegex, FilterKey = "(?i)(英国|UK|United Kingdom)"
+
+[Rule]
+# DNS Leak
+DOMAIN-SUFFIX,ipleak.net,PROXY
+DOMAIN-SUFFIX,browserleaks.com,PROXY
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY
+DOMAIN-SUFFIX,test-ipv6.com,PROXY
+#LAN
+IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+IP-CIDR,224.0.0.0/3,DIRECT,no-resolve
+IP-CIDR6,fc00::/7,DIRECT,no-resolve
+IP-CIDR6,fe80::/10,DIRECT,no-resolve
+IP-CIDR6,ff00::/8,DIRECT,no-resolve
+#China
+GEOIP,CN,DIRECT
+#Final
+FINAL,PROXY
+
+[Remote Rule]
+https://raw.githubusercontent.com/Loon0x00/LoonLiteRules/main/proxy/YouTube.list, policy=PROXY, tag=YouTube, enabled=true
+https://raw.githubusercontent.com/Loon0x00/LoonLiteRules/main/proxy/Telegram.list, policy=PROXY, tag=Telegram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list, policy=PROXY, tag=Global, enabled=true
+
+[Rewrite]
+
+[Script]
+
+[Plugin]
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/YouTube, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/Spotify, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/AppleMaps, enabled=false
