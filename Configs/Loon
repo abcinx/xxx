@@ -1,5 +1,5 @@
 #default config
-#Date: 2022.06.01
+#Date: 2022.07.01
 #Author: Loon
 
 [General]
@@ -76,6 +76,6 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 [Script]
 
 [Plugin]
-https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/YouTube, enabled=true
-https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/Spotify, enabled=true
-https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Plugins/AppleMaps, enabled=false
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Loon/Plugins/YouTube, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Loon/Plugins/Spotify, enabled=true
+https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Loon/Plugins/AppleMaps, enabled=false
