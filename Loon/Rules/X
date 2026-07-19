@@ -1,0 +1,22 @@
+# X (Twitter)
+
+# 主站
+DOMAIN-SUFFIX,x.com
+DOMAIN-SUFFIX,twitter.com
+DOMAIN-SUFFIX,t.co
+
+# API
+DOMAIN-SUFFIX,api.x.com
+DOMAIN-SUFFIX,api.twitter.com
+
+# CDN / 媒体
+DOMAIN-SUFFIX,twimg.com
+DOMAIN-SUFFIX,video.twimg.com
+DOMAIN-SUFFIX,abs.twimg.com
+
+# 登录认证
+DOMAIN-SUFFIX,oauth.twitter.com
+
+# 推送服务
+DOMAIN-SUFFIX,pscp.tv
+DOMAIN-SUFFIX,periscope.tv
