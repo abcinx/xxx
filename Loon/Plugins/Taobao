@@ -1,141 +1,62 @@
-#!name=淘宝天猫极简净化2026
-#!desc=去广告/去推荐/去营销入口 保留购物功能
-#!author=ChatGPT
-#!tag=淘宝 天猫 极简
-
+#!name=淘宝净化
+#!desc=淘宝净化插件：去除部分广告、营销推荐、视频流请求，保留基础购物功能。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/IconSet/Adblock.png
+#!date=2026-07-19
 
 [Rule]
 
+# ===== 淘宝广告/营销 =====
+DOMAIN,et.tanx.com,REJECT
+DOMAIN,df.tanx.com,REJECT
+DOMAIN,opehs.tanx.com,REJECT
+DOMAIN,adash.man.aliyuncs.com,REJECT
+DOMAIN,beacon-api.aliyuncs.com,REJECT
+DOMAIN,applog.uc.cn,REJECT
+DOMAIN,atoken.m.taobao.com,REJECT
+DOMAIN,retcode.alicdn.com,REJECT
+DOMAIN,arms-retcode.aliyuncs.com,REJECT
 
-#====================
-# 广告服务器
-#====================
+DOMAIN,baichuan-sdk.alicdn.com,REJECT
+DOMAIN,acs4baichuan.m.taobao.com,REJECT
+DOMAIN,nbsdk-baichuan.alicdn.com,REJECT
 
-DOMAIN,adashx.m.taobao.com,REJECT
-DOMAIN,h-adashx.ut.taobao.com,REJECT
-DOMAIN,ut.taobao.com,REJECT
 
+# ===== 淘宝视频/逛逛 =====
+DOMAIN-SUFFIX,video.taobao.com,REJECT
+DOMAIN-SUFFIX,cloud.video.taobao.com,REJECT
+DOMAIN-SUFFIX,media.taobao.com,REJECT
+DOMAIN-SUFFIX,video.alibaba.com,REJECT
 
-# 阿里广告
 
-DOMAIN,ad.alibaba.com,REJECT
-DOMAIN,alimama.com,REJECT
-DOMAIN,afp.alicdn.com,REJECT
+# ===== 淘宝推荐追踪 =====
+DOMAIN-SUFFIX,ut.taobao.com,REJECT
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umtrack.com,REJECT
 
 
-# 视频广告
+# ===== 淘宝营销接口 =====
+URL-REGEX,^https:\/\/.*\/amdc\/mobileDispatch,REJECT
 
-DOMAIN,ems.youku.com,REJECT
+URL-REGEX,^https:\/\/.*\/recommend.*(item|feed|guess),REJECT
 
+URL-REGEX,^https:\/\/.*\/mtop.*(guess|recommend|ad),REJECT
 
 
-#====================
-# Rewrite
-#====================
+# ===== 关键词拦截 =====
+DOMAIN-KEYWORD,tanx,REJECT
+DOMAIN-KEYWORD,adash,REJECT
+DOMAIN-KEYWORD,recommend,REJECT
 
 
-# 开屏广告
+[Rewrite]
 
-^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv reject-dict
+# 淘宝广告请求
+^https:\/\/.*\/amdc\/mobileDispatch reject
 
-
-# 开屏资源
-
-^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.etao\.noah\.query.*tao_splash reject-dict
-
-
-
-# 淘宝启动页
-
-^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.splash\.awesome\.get reject-dict
-
-
-
-# 首页运营位
-
-^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.newface\.awesome\.get reject-dict
-
-
-
-# 二楼活动
-
-^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.volvo\.secondfloor\.getconfig reject-dict
-
-
-
-# 弹窗活动
-
-^https:\/\/poplayer\.template\.alibaba\.com\/.* reject-dict
-
-
-
-# 飞猪广告资源
-
-^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\..* reject-dict
-
-
-
-#====================
-# 推荐流过滤
-#====================
-
-
-# 猜你喜欢
-
-^https:\/\/.*\.taobao\.com\/.*guess.* reject-dict
-
-
-# 推荐商品
-
-^https:\/\/.*\.taobao\.com\/.*recommend.* reject-dict
-
-
-# 信息流
-
-^https:\/\/.*\.taobao\.com\/.*feed.* reject-dict
-
-
-
-#====================
-# Script
-#====================
-
-
-# 首页JSON净化
-
-http-response
-
-^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.*
-
-script-path=https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js
-
-requires-body=true
-
-tag=淘宝首页净化
-
-
-
-# 弹窗净化
-
-http-response
-
-^https:\/\/poplayer\.template\.alibaba\.com\/.*
-
-script-path=https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js
-
-requires-body=true
-
-tag=淘宝弹窗净化
-
+# 淘宝营销图片/推广资源
+^https:\/\/.*alicdn.*\/.*ad.* reject
 
 
 [MitM]
 
-
-hostname=
-
-guide-acs.m.taobao.com,
-
-poplayer.template.alibaba.com,
-
-acs.m.taobao.com
+hostname=*.taobao.com,*.tmall.com,*.alicdn.com
