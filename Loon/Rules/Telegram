@@ -1,0 +1,18 @@
+# Telegram
+
+# Telegram 主域名
+DOMAIN-SUFFIX,telegram.org
+DOMAIN-SUFFIX,t.me
+DOMAIN-SUFFIX,telegra.ph
+DOMAIN-SUFFIX,telegram.me
+
+# Telegram API
+DOMAIN-SUFFIX,api.telegram.org
+DOMAIN-SUFFIX,core.telegram.org
+
+# Telegram CDN / 文件服务器
+DOMAIN-SUFFIX,telegram-cdn.org
+DOMAIN-SUFFIX,dc.telegram.org
+
+# Telegram 图片、文件
+DOMAIN-SUFFIX,telesco.pe
