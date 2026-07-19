@@ -1,0 +1,141 @@
+#!name=淘宝天猫极简净化2026
+#!desc=去广告/去推荐/去营销入口 保留购物功能
+#!author=ChatGPT
+#!tag=淘宝 天猫 极简
+
+
+[Rule]
+
+
+#====================
+# 广告服务器
+#====================
+
+DOMAIN,adashx.m.taobao.com,REJECT
+DOMAIN,h-adashx.ut.taobao.com,REJECT
+DOMAIN,ut.taobao.com,REJECT
+
+
+# 阿里广告
+
+DOMAIN,ad.alibaba.com,REJECT
+DOMAIN,alimama.com,REJECT
+DOMAIN,afp.alicdn.com,REJECT
+
+
+# 视频广告
+
+DOMAIN,ems.youku.com,REJECT
+
+
+
+#====================
+# Rewrite
+#====================
+
+
+# 开屏广告
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv reject-dict
+
+
+# 开屏资源
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.etao\.noah\.query.*tao_splash reject-dict
+
+
+
+# 淘宝启动页
+
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.splash\.awesome\.get reject-dict
+
+
+
+# 首页运营位
+
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.newface\.awesome\.get reject-dict
+
+
+
+# 二楼活动
+
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.volvo\.secondfloor\.getconfig reject-dict
+
+
+
+# 弹窗活动
+
+^https:\/\/poplayer\.template\.alibaba\.com\/.* reject-dict
+
+
+
+# 飞猪广告资源
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\..* reject-dict
+
+
+
+#====================
+# 推荐流过滤
+#====================
+
+
+# 猜你喜欢
+
+^https:\/\/.*\.taobao\.com\/.*guess.* reject-dict
+
+
+# 推荐商品
+
+^https:\/\/.*\.taobao\.com\/.*recommend.* reject-dict
+
+
+# 信息流
+
+^https:\/\/.*\.taobao\.com\/.*feed.* reject-dict
+
+
+
+#====================
+# Script
+#====================
+
+
+# 首页JSON净化
+
+http-response
+
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.*
+
+script-path=https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js
+
+requires-body=true
+
+tag=淘宝首页净化
+
+
+
+# 弹窗净化
+
+http-response
+
+^https:\/\/poplayer\.template\.alibaba\.com\/.*
+
+script-path=https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js
+
+requires-body=true
+
+tag=淘宝弹窗净化
+
+
+
+[MitM]
+
+
+hostname=
+
+guide-acs.m.taobao.com,
+
+poplayer.template.alibaba.com,
+
+acs.m.taobao.com
