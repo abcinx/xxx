@@ -1,5 +1,6 @@
 #!name=广告拦截
 #!desc=去除广告。
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/IconSet/Adblock.png
 #!date=2026-07-01 12:36:00
 
 [Rule]
