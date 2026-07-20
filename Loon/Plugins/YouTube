@@ -1,6 +1,7 @@
 #!name=YouTube
 #!desc=去除广告！
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
+#!date=2026-07-20
 
 [Argument]
 屏蔽上传按钮=switch,"true","false",tag=屏蔽上传按钮, desc=屏蔽上传按钮
