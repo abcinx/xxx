@@ -23,8 +23,7 @@ DOMAIN,spclient.wg.spotify.com,REJECT-NO-DROP
 # 去除推荐歌单注入
 ^https:\/\/.*37i9dQZF.* - reject
 # 禁止缓存配置
-^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/user-customization-service\/v1\/customize$
-header-del if-none-match
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/user-customization-service\/v1\/customize$ header-del if-none-match
 
 [Script]
 # 搜索优化
@@ -51,4 +50,4 @@ binary-body-mode=true
 tag=spotify-proto
 
 [MITM]
-hostname = spclient.wg.spotify.com,*.spclient.spotify.com
+hostname = spclient.wg.spotify.com, *.spclient.spotify.com
