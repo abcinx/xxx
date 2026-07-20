@@ -6,13 +6,16 @@
 [Rule]
 AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
 DOMAIN,aet.spotify.com,REJECT
+DOMAIN,adstudio.spotify.com,REJECT
+DOMAIN,ads-fa.spotify.com,REJECT
+DOMAIN,spclient.wg.spotify.com,REJECT-NO-DROP
 
 [Rewrite]
 ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon - reject
 ^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ - reject
 ^https:\/\/.*37i9dQZF1EYkqdzj48dyYq - reject
 ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize$ header-del if-none-match
-
+^https:\/\/(.*-)?spclient\.spotify\.com\/(recommendations|inspired).* - reject
 [Script]
 http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse script-path=https://raw.githubusercontent.com/uki0xc/ukix/refs/heads/main/js/Spotify-search.js, requires-body=true, binary-body-mode=true, tag=spotify-search
 http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify script-path=https://raw.githubusercontent.com/uki0xc/ukix/refs/heads/main/js/Spotify-scroll.js, requires-body=true, binary-body-mode=true, tag=spotify-scroll
