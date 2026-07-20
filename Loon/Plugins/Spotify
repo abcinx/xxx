@@ -6,9 +6,6 @@
 [Rule]
 AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
 DOMAIN,aet.spotify.com,REJECT
-DOMAIN,adstudio.spotify.com,REJECT
-DOMAIN,ads-fa.spotify.com,REJECT
-DOMAIN,spclient.wg.spotify.com,REJECT-NO-DROP
 
 [Rewrite]
 ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon - reject
