@@ -2,7 +2,6 @@
 #!desc=去除广告！
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 #!date=2026-07-20
-#!arguments-desc=- 屏蔽参数：[true, false] \n- 翻译参数：[语言代码, off] \n\n1. 语言代码遵循 Google Translate Languages Codes, 当填入 off 时关闭翻译\n2. 开启调试模式用于输出更多日志
 
 [Argument]
 屏蔽上传按钮=switch,"true","false",tag=屏蔽上传按钮, desc=屏蔽上传按钮
