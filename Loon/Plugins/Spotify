@@ -3,6 +3,10 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/Spotify.PNG
 #!date=2026-07-20
 
+[Argument]
+tab=switch, false, true, tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
+useractivity=switch, true, false, tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
+
 [Rule]
 AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
 DOMAIN,aet.spotify.com,REJECT
@@ -20,7 +24,7 @@ http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:
 
 http-request ^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service script-path=https://raw.githubusercontent.com/uki0xc/ukix/refs/heads/main/js/Spotify-gabo.js, tag=spotify-gabo
 
-http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$ script-path=https://raw.githubusercontent.com/uki0xc/ukix/refs/heads/main/js/Spotify-proto.js, requires-body=true, binary-body-mode=true, tag=spotify-proto
+http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$ script-path=https://raw.githubusercontent.com/uki0xc/ukix/refs/heads/main/js/Spotify-proto.js, requires-body=true, binary-body-mode=true,argument=[{tab},{useractivity}], tag=spotify-proto
 
 [MITM]
 hostname = spclient.wg.spotify.com, *spclient.spotify.com
