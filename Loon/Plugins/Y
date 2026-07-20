@@ -1,8 +1,6 @@
-#!name=YouTubeNoAds
-#!desc=YouTube Enhance & AdsBlock
-#!author=感谢原作者Maasea[https://github.com/Maasea]
-#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1082.png
-#!arguments-desc=\n▶ 参数说明:\n\n - 屏蔽按钮: 默认开启，可手动切换\n\n - 调试模式: 默认关闭，非调试无需切换\n\n - 翻译语言: 默认关闭，可自定义语言代码\n\n\n▶ 语言代码：\n\n - 翻译语言可根据需求自定义，语言代码遵循Google Translate Languages Codes，示例如下↓\n\n - 简中: zh-Hans，日语: ja，韩语: ko，西语: es，法语: fr
+#!name=YouTube
+#!desc=去除广告！
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 
 [Argument]
 屏蔽上传按钮=switch,"true","false",tag=屏蔽上传按钮, desc=屏蔽上传按钮
