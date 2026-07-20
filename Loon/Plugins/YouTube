@@ -4,11 +4,11 @@
 #!date=2026-07-20
 
 [Argument]
-blockUpload=switch,"true","false",tag=+, desc=屏蔽上传按钮
-blockImmersive=switch,"true","false",tag=选段, desc=屏蔽选段按钮
-blockShorts=switch,"false","true",tag=Shorts, desc=屏蔽Shorts按钮
+blockUpload=switch,"true","false",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
+blockImmersive=switch,"true","false",tag=屏蔽(选段)按钮, desc=屏蔽(选段)按钮
+blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)按钮
 captionLang=select,"off","zh-Hans","zh-Hant","ja","ko","en",tag=字幕翻译, desc=字幕翻译语言
-debug=switch,"false","true",tag=调试模式, desc=启用调试模式
+debug=switch,"false","true",tag=启用调试模式, desc=启用调试模式
 
 [Script]
 http-response ^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$ script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{debug}], tag=youtube.response
