@@ -51,6 +51,4 @@ binary-body-mode=true
 tag=spotify-proto
 
 [MITM]
-hostname =
-spclient.wg.spotify.com,
-*.spclient.spotify.com
+hostname = spclient.wg.spotify.com,*.spclient.spotify.com
