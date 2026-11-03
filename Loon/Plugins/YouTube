@@ -5,7 +5,7 @@
 
 [Argument]
 blockUpload=switch,"true","false",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
-blockImmersive=switch,"true","false",tag=屏蔽(选段)按钮, desc=屏蔽(选段)按钮
+#blockImmersive=switch,"true","false",tag=屏蔽(选段)按钮, desc=屏蔽(选段)按钮
 blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)按钮
 captionLang=select,"off","zh-Hans","zh-Hant","ja","ko","en",tag=字幕翻译, desc=字幕翻译语言
 debug=switch,"false","true",tag=启用调试模式, desc=启用调试模式
