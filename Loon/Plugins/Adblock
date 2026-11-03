@@ -99,9 +99,3 @@ DOMAIN-KEYWORD,trace.qq.com,REJECT
 
 # ===== IP =====
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve
-
-[Rewrite]
-^http:\/\/.+\/amdc\/mobileDispatch reject
-
-[MitM]
-hostname=video-dsp.pddpic.com,t-dsp.pinduoduo.com
