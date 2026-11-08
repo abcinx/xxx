@@ -1,0 +1,29 @@
+#!name=YouTube去广告
+#!desc=支持画中画(PiP)与后台播放；去除 YouTube 广告（基于 Maasea 脚本，由 Shadowrocket 模块转换而来）
+#!author=Maasea（Loon 转换）
+#!homepage=https://yfamilys.com
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+#!version=1.0.0
+#!date=2026-08-25
+
+[Rule]
+# 拦截 googlevideo 的 UDP(QUIC)，强制走 TCP，保证下方 URL 重写与 MITM 生效
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+
+[URL Rewrite]
+# 去除视频地址中的 ctier=L（广告分级参数）
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) 302 $1$2$3
+# 拦截带 oad 参数的广告视频请求
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad reject-200
+# 拦截 YouTube 广告统计与跟踪接口
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads reject-200
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) reject-200
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext reject-200
+
+[Script]
+# 响应体过滤：移除 browse/next/player/search 等接口返回中的广告内容
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, timeout=60, tag=YouTube去广告, argument="{"lyricLang":"off","captionLang":"off","blockUpload":true,"blockImmersive":true,"debug":false}"
+
+[MITM]
+hostname = -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com
