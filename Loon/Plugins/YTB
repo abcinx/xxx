@@ -1,8 +1,8 @@
 
-#!name=YouTube纯净去广告
-#!desc=Maasea响应体过滤，去除YouTube视频广告及广告跟踪，保留原生界面和正常功能
-#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-#!version=2.0.0
+#!name=YouTube
+#!desc=去除YouTube视频广告及广告跟踪，保留原生界面和正常功能
+#!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
+#!version=1.0.0
 
 [Rule]
 # 阻止QUIC，确保HTTPS请求经过MITM
