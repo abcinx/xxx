@@ -5,7 +5,7 @@
 #!date=2026-11-13
 
 [Argument]
-blockUpload=switch,"true","false",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
+blockUpload=switch,"false","true",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
 blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)按钮
 
 [Rule]
