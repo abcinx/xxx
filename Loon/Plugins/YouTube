@@ -10,6 +10,26 @@ blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)�
 captionLang=select,"off","zh-Hans","zh-Hant","ja","ko","en",tag=字幕翻译, desc=字幕翻译语言
 debug=switch,"false","true",tag=启用调试模式, desc=启用调试模式
 
+[Rule]
+# 阻止 QUIC，确保相关流量经过 HTTPS MITM
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+
+[URL Rewrite]
+# 移除视频地址 ctier=L 参数
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) 302 $1$2$3
+
+# 拦截带有广告标记的非正常视频请求
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad reject-200
+
+# 拦截广告统计
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads reject-200
+
+# 拦截广告投放及追踪
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) reject-200
+
+# 拦截广告 QoE 统计
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext reject-200
 [Script]
 http-response ^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$ script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{debug}], tag=youtube.response
 http-request ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&ack.* script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js, requires-body=true, binary-body-mode=true, argument=[{captionLang}], tag=youtube.request.init
