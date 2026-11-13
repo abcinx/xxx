@@ -1,11 +1,11 @@
 
 #!name=YouTube
-#!desc=去除YouTube视频广告及广告跟踪，保留原生界面和正常功能
+#!desc=YouTube去广告及广告跟踪，保留原生界面、Shorts、上传及正常播放
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
-#!date=2026-07-20
+#!date=2026-11-13
 
 [Rule]
-# 阻止QUIC，确保HTTPS请求经过MITM
+# 阻止 QUIC，确保请求经过代理及 MITM
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
@@ -13,7 +13,7 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 # 移除视频地址广告分级参数
 (^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) 302 $1$2$3
 
-# 拦截广告视频请求
+# 拦截视频广告请求
 ^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad reject-200
 
 # 拦截广告统计及跟踪
@@ -22,8 +22,8 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 ^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext reject-200
 
 [Script]
-# Maasea响应体广告过滤
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config)(\?.*)?$ script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=60, tag=YouTube纯净去广告, argument="{"captionLang":"off","blockUpload":false,"blockImmersive":false,"blockShorts":false,"debug":false}"
+# Maasea YouTube 响应体广告过滤
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config)(\?.*)?$ script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=60, tag=YouTube纯净去广告, argument={"captionLang":"off","blockUpload":false,"blockImmersive":false,"blockShorts":false,"debug":false}
 
 [MITM]
 hostname = -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com
