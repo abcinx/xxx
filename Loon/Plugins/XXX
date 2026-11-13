@@ -4,6 +4,10 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 #!date=2026-11-13
 
+[Argument]
+blockUpload=switch,"true","false",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
+blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)按钮
+
 [Rule]
 # 阻止 QUIC，确保相关流量经过 HTTPS MITM
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
