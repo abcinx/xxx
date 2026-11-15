@@ -3,13 +3,6 @@
 #!icon=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Icons/YouTube.PNG
 #!date=2026-07-20
 
-[Argument]
-blockUpload=switch,"false","true",tag=屏蔽(+)按钮, desc=屏蔽(+)按钮
-blockImmersive=switch,"false","true",tag=屏蔽(选段)按钮, desc=屏蔽(选段)按钮
-blockShorts=switch,"false","true",tag=屏蔽(Shorts)按钮, desc=屏蔽(Shorts)按钮
-captionLang=select,"off","zh-Hans","zh-Hant","ja","ko","en",tag=字幕翻译, desc=字幕翻译语言
-debug=switch,"false","true",tag=启用调试模式, desc=启用调试模式
-
 [Rule]
 # 阻止 QUIC，确保相关流量经过 HTTPS MITM
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
@@ -33,13 +26,7 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
 [Script]
 # Maasea Googlevideo 请求体处理
-http-response ^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$ script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{debug}], tag=youtube.response
-
-# Maasea YouTube log_event 请求处理
-http-request ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&ack.* script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js, requires-body=true, binary-body-mode=true, argument=[{captionLang}], tag=youtube.request.init
-
-# Maasea YouTube 响应体广告过滤
-http-request ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/log_event script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.request.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{debug}], tag=youtube.request.log_event
+http-response ^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$ script-path=https://raw.githubusercontent.com/abcinx/xxx/refs/heads/main/Loon/Scripts/youtube.response.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{debug}], tag=youtube.response
 
 [MITM]
 hostname = *.googlevideo.com, youtubei.googleapis.com
