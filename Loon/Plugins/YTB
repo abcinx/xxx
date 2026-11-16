@@ -9,12 +9,6 @@ AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
 [URL Rewrite]
-# 移除视频地址 ctier=L 参数
-(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) 302 $1$2$3
-
-# 拦截带有广告标记的非正常视频请求
-^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad reject-200
-
 # 拦截广告统计
 ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads reject-200
 
